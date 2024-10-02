@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/models/image_data.dart';
+import 'package:gallery_app/pages/fullscreen_mode.dart';
 import 'package:gallery_app/services/home_page_service.dart';
 
 // class HomePage extends StatelessWidget {
@@ -139,14 +140,24 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                        image: NetworkImage(kIsWeb
-                            ? image.largeImageUrl ?? ''
-                            : image.previewUrl ?? ''),
-                        fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FullScreenMode(
+                                    image: image.largeImageUrl ?? '',
+                                  )));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        image: DecorationImage(
+                          image: NetworkImage(kIsWeb
+                              ? image.largeImageUrl ?? ''
+                              : image.previewUrl ?? ''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
